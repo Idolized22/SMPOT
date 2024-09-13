@@ -139,13 +139,13 @@ def plot_stock_moving_averages_plotly(stock_symbols, start_date):
             'active': len(steps) // 2,
             'currentvalue': {"prefix": f"{stock_symbol} Buy Price: "},
             'pad': {"t": 15},
-            # 'y': 0 + idx * 0.2,
+            'y': -0.15, #+ idx * 0.2,
             'steps': steps})
 
     # Update layout to add the secondary y-axis
     fig.update_layout(
         sliders=sliders,
-        title='Stock Prices and Moving Averages (Percentages from Buy Price)',
+        title=f'{stock_symbol} Stock Prices and Moving Averages (Percentages from Buy Price)',
         xaxis_title='Date',
         yaxis_title='Price (USD)',
         yaxis2_title='Profit %',
@@ -165,8 +165,8 @@ def plot_stock_moving_averages_plotly(stock_symbols, start_date):
         #     autorange=True,
         #     overlaying='y2'
         # ),
-        width=1000,
-        height=600,
+        width=1600,
+        height=1100,
         legend_title="Legend",
         template='plotly_dark'
     )
