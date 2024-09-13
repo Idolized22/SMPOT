@@ -28,7 +28,7 @@ def main():
 
 def show_fig(ticker ='SPY', start_date='2018-01-01'):
     fig = plot_stock_moving_averages_plotly(ticker, start_date)
-    st_fig = st.plotly_chart(fig, use_container_width=False)
+    st_fig = st.plotly_chart(fig, use_container_width=True, theme=None)
     # st_fig
 
 if __name__ == '__main__':
