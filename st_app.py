@@ -19,7 +19,7 @@ def main():
         start_date_str = start_date.strftime('%Y-%m-%d')
 
     # Main content
-    st.title('Stock Data App')
+    st.title('SMPOT')
 
     # st.write(f"**Ticker:** {ticker}")
     # st.write(f"**Start Date:** {start_date_str}")
