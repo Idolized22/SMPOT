@@ -4,6 +4,7 @@ from show_stock_graph_about_buy_price import plot_stock_moving_averages_plotly
 import datetime
 
 def main():
+    st. set_page_config(layout="wide") 
     start_date_str = '2018-01-01'
     # Sidebar inputs
     st.sidebar.header('Stock Data Input')
