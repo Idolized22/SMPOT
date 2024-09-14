@@ -11,6 +11,7 @@ def main():
 
     # Ticker input
     ticker = st.sidebar.text_input('Enter ticker name', 'SPY')
+    ticker = ticker.strip().upper()
 
     # Start date input with a calendar
     start_date = st.sidebar.date_input('Select start date', value=datetime.date(2018,1,1), min_value=datetime.date(1980,1,1))

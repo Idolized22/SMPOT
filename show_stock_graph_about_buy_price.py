@@ -55,14 +55,14 @@ def plot_stock_moving_averages_plotly(stock_symbols, start_date):
         # Add stock price line with hover info showing distance from MA150 and MA200
         fig.add_trace(go.Scatter(x=stock_data.index, y=stock_data['Close'], 
                                  mode='lines', name=f'{stock_symbol} Close Price', 
-                                 line=dict(color='green', width=2),
+                                 line=dict(color='magenta', width=2),
                                 #  yaxis='y2',  # Use secondary y-axis
                                  hovertemplate=(
                                      f'Ticker: {stock_symbol}<br>' +
                                      'Close: %{y:.2f} USD<br>' +
                                      'Date: %{x}<br>' +
-                                     'Dist from MA150d: %{customdata[0]:.2f} USD ' + '%{customdata[1]:.2f}%<br>' +
-                                     'Dist from MA200d: %{customdata[2]:.2f} USD ' + '%{customdata[3]:.2f}%'),
+                                     'Dist from MA150d: %{customdata[0]:.2f} $ ' + '%{customdata[1]:.2f}%<br>' +
+                                     'Dist from MA200d: %{customdata[2]:.2f} $ ' + '%{customdata[3]:.2f}%'),
                                      customdata=stock_data[['Dist_MA150_Abs', 'Dist_MA150_Percent', 
                                                             'Dist_MA200_Abs', 'Dist_MA200_Percent', ]].values),
                                 # secondary_y=True,
@@ -74,7 +74,7 @@ def plot_stock_moving_averages_plotly(stock_symbols, start_date):
             x=stock_data.index,
             y= stock_data['Profit'], #100 * ((stock_data['Close'] - buy_price) / buy_price), #(100 * (stock_data['Close'] / buy_price)) - 100 ,  # Relative to default buy price
             mode='lines',
-            name=f'{stock_symbol} percentages from buy price',
+            name=f'{stock_symbol} profit [%]',
             line=dict(color='blue', width=2),
             yaxis='y1',
             hovertemplate=(
