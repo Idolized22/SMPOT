@@ -25,7 +25,9 @@ def plot_stock_moving_averages_plotly(stock_symbols, start_date):
     
     for idx, stock_symbol in enumerate(stock_symbols):
         # Download stock data
+        stock_symbol = stock_symbol.strip().upper()
         stock_data = yf.download(stock_symbol, start=start_date)
+        
         fig_data_per_stock[stock_symbol] = []
         buy_price = stock_data['Close'].mean()  # Default buy price as the mean close price
         
