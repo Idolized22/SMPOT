@@ -54,8 +54,8 @@ def plot_stock_moving_averages_plotly(stock_symbols, start_date):
         fig_data_per_stock[stock_symbol].append(y_close)
         # Add stock price line with hover info showing distance from MA150 and MA200
         fig.add_trace(go.Scatter(x=stock_data.index, y=stock_data['Close'], 
-                                 mode='lines', name=f'{stock_symbol} Close Price', 
-                                 line=dict(color='magenta', width=2),
+                                 mode='lines+markers', name=f'{stock_symbol} Close Price', 
+                                 line=dict(color=f'rgb{(45,127, 127)}', width=2),
                                 #  yaxis='y2',  # Use secondary y-axis
                                  hovertemplate=(
                                      f'Ticker: {stock_symbol}<br>' +
@@ -73,7 +73,7 @@ def plot_stock_moving_averages_plotly(stock_symbols, start_date):
         percentage_trace = go.Scatter(
             x=stock_data.index,
             y= stock_data['Profit'], #100 * ((stock_data['Close'] - buy_price) / buy_price), #(100 * (stock_data['Close'] / buy_price)) - 100 ,  # Relative to default buy price
-            mode='lines',
+            mode='lines+markers',
             name=f'{stock_symbol} profit [%]',
             line=dict(color='blue', width=2),
             yaxis='y1',
@@ -94,7 +94,7 @@ def plot_stock_moving_averages_plotly(stock_symbols, start_date):
         fig.add_trace(go.Scatter(
             x=stock_data.index,
             y=stock_data['MA50'],
-            mode='lines',
+            mode='lines+markers',
             name=f'{stock_symbol} MA50days',
             line=dict(width=2, color='green', dash='dash'),
             hovertemplate=f'{stock_symbol} MA50d: <br>' + '%{y:.2f} USD<br>Date: %{x}'
@@ -105,7 +105,7 @@ def plot_stock_moving_averages_plotly(stock_symbols, start_date):
         fig.add_trace(go.Scatter(
             x=stock_data.index,
             y=stock_data['MA150'],
-            mode='lines',
+            mode='lines+markers',
             name=f'{stock_symbol} MA150days',
             line=dict(width=2, color='yellow', dash='dashdot'),
             hovertemplate=f'{stock_symbol} MA150d: <br>' + '%{y:.2f} USD<br>Date: %{x}'
@@ -116,7 +116,7 @@ def plot_stock_moving_averages_plotly(stock_symbols, start_date):
         fig.add_trace(go.Scatter(
             x=stock_data.index,
             y=stock_data['MA200'],
-            mode='lines',
+            mode='lines+markers',
             name=f'{stock_symbol} MA200days',
             line=dict(width=2, color='red', dash='dot'),
             hovertemplate=f'{stock_symbol} MA200d: <br>' + '%{y:.2f} USD<br>Date: %{x}'
@@ -150,7 +150,16 @@ def plot_stock_moving_averages_plotly(stock_symbols, start_date):
         title=f'{stock_symbol} Stock Prices and Moving Averages (Percentages from Buy Price)',
         xaxis_title='Date',
         yaxis_title='Price (USD)',
-        yaxis2_title='Profit %',
+        # yaxis2_title='Profit %',
+        yaxis2=dict(
+            title="Profit %", 
+            overlaying="y", 
+            side="right",
+            zeroline=True,
+            zerolinecolor='red',
+            color='blue',
+            gridcolor='darkblue'
+            ), 
         # yaxis=dict(
         #     title='Change from buy price %',
         #     side='left',
@@ -169,8 +178,16 @@ def plot_stock_moving_averages_plotly(stock_symbols, start_date):
         # ),
         width=1600,
         height=1100,
-        legend_title="Legend",
-        template='plotly_dark'
+        legend_title="",
+        template='plotly_dark',
+        legend=dict(
+        orientation="h",  # Set legend orientation to horizontal
+        yanchor="bottom",    # Anchor legend to top
+        y=-0.1,           # Position legend below the plot (negative value moves it down)
+        xanchor="center", # Center the legend horizontally
+        x=0.5             # Center the legend horizontally
+        )
+
     )
 
     return fig
